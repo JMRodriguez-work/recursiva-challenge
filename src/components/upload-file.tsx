@@ -23,7 +23,7 @@ function UploadFile({ setFileData }: UploadFileProps) {
     }
   };
   return (
-    <div className="px-4 h-96 w-72 bg-white text-black rounded-lg shadow-md">
+    <div className="px-4 h-96 w-72 bg-white text-black rounded-xl shadow-md">
       <form className="h-full pb-10" onSubmit={handleSubmit}>
         <div className="flex flex-col items-center justify-center h-full">
           <label
