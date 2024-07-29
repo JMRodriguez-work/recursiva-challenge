@@ -1,4 +1,3 @@
-// report-common-names-river.tsx
 import { Person } from "../definitions";
 import {
   Table,

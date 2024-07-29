@@ -7,17 +7,28 @@ interface UploadFileProps {
 
 function UploadFile({ setFileData }: UploadFileProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
+      if (file.type !== "text/csv") {
+        setError("Formato inválido. Por favor, seleccione un archivo CSV.");
+        setSelectedFile(null);
+      } else {
+        setSelectedFile(file);
+        setError(null);
+      }
+    } else {
+      setSelectedFile(null);
+      setError("Error al subir el archivo");
     }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     
-    if(selectedFile) {
+    if (selectedFile) {
       const fileText = await selectedFile.text();
       setFileData(fileText);
     }
@@ -50,6 +61,13 @@ function UploadFile({ setFileData }: UploadFileProps) {
             <div className="mt-4 pt-10 border-t text-center">
               <p className="font-semibold flex flex-col">
                 Archivo seleccionado: <span>{selectedFile.name}</span>
+              </p>
+            </div>
+          )}
+          {error && (
+            <div className="mt-4 pt-10 border-t text-center">
+              <p className="font-semibold text-red-500">
+                {error}
               </p>
             </div>
           )}

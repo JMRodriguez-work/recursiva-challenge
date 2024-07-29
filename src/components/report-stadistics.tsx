@@ -1,4 +1,3 @@
-// report-team-stats.tsx
 import { Person } from "../definitions";
 import {
   Table,
